@@ -1,19 +1,38 @@
 import "./App.css";
 import { User } from "./User";
+import { useState} from "react";
 
 function App() {
-    const planets = [
-        { name: "Mars", isGasPlanet: false},
-        { name: "Earth", isGasPlanet: false},
-        { name: "Jupiter", isGasPlanet: true},
-        { name: "Venus", isGasPlanet: false},
-        { name: "Neptune", isGasPlanet: true},
-        { name: "Uranus", isGasPlanet: true},
-    ]
+    // const [age, setAge] = useState(0);
+    // const increaseAge = () => {
+    //     setAge(age +1);
+    //     console.log(age);
+    // };
 
-    return <div className="App">
-        {planets.map((planet,key) => !planet.isGasPlanet && <h1>{planet.name}</h1>)}
-    </div>
+    // const [inputValue, setInputValue] = useState("");
+    // const handleInputChange = (event) => {
+    //     setInputValue(event.target.value);
+    // }
+
+    // const [showText, setShowText] = useState(false);
+
+    const [textColor, setTextColor] = useState("blue");
+    return (
+        <div className="App">
+            <button onClick={() => {setTextColor(textColor === 'blue' ?"red" : 'blue')}}>Show/Hide</button>
+            <h1 style={{color: textColor}}> My name is San.D</h1>
+
+            {/*<button onClick={() => {setShowText(!showText)}}>Show/Hide</button>*/}
+            {/*{ showText === true && <h1> My name is San.D</h1>}*/}
+
+
+            {/*<input type="text" onChange={handleInputChange}/>*/}
+            {/*{inputValue}*/}
+
+            {/*{age}*/}
+            {/*<button onClick={increaseAge}>Increase the Age</button>*/}
+        </div>
+    );
 }
 
 export default App;
