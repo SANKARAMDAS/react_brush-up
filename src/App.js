@@ -1,15 +1,30 @@
 import "./App.css";
+import { User } from "./User";
 
 function App() {
-    const age = 17;
-    const isGreen = true;
+    //list/array
+    // const names = ['San.D','Pedro','Jessica','Jerry','Tom','Jack'];
+    // return <div className="App">
+    //     {names.map((name,key) => (
+    //         <h1>
+    //             {name}
+    //         </h1>
+    //     ))}
+    // </div>
+    const users = [
+        { name: 'Jack', age: 21},
+        { name: 'Jerry', age: 12},
+        { name: 'Tom', age: 23},
+    ];
 
-  return (
-      //Ternary  Operator
-    <div className="App">
-        {age <= 18 ? <h1> Under Age </h1> : <h1> Over Age</h1>}
-        <h1 style={{color: isGreen ? "green" :"red"}}>This has color</h1>
+    return <div className="App">
+        {users.map((user, key) => {
+            return (
+                <User name={user.name} age={user.age}/>
+            )
+        })}
     </div>
-  );
 }
+
+
 export default App;
