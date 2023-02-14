@@ -16,11 +16,30 @@ function App() {
 
     // const [showText, setShowText] = useState(false);
 
-    const [textColor, setTextColor] = useState("blue");
+    // const [textColor, setTextColor] = useState("blue");
+
+    const [count, setCount] = useState(0);
+
+    const increaseNumber = () => {
+        setCount(count + 1);
+    }
+
+    const decreaseNumber = () => {
+      setCount(count - 1);
+    }
+
+    const resetNumber = () => {
+        setCount(0);
+    }
     return (
         <div className="App">
-            <button onClick={() => {setTextColor(textColor === 'blue' ?"red" : 'blue')}}>Show/Hide</button>
-            <h1 style={{color: textColor}}> My name is San.D</h1>
+            <button onClick={increaseNumber}>Increase</button>
+            <button onClick={decreaseNumber}>Decrease</button>
+            <button onClick={resetNumber}>Set to Zero</button>
+            {count}
+
+            {/*<button onClick={() => {setTextColor(textColor === 'blue' ?"red" : 'blue')}}>Show/Hide</button>*/}
+            {/*<h1 style={{color: textColor}}> My name is San.D</h1>*/}
 
             {/*<button onClick={() => {setShowText(!showText)}}>Show/Hide</button>*/}
             {/*{ showText === true && <h1> My name is San.D</h1>}*/}
