@@ -3,53 +3,43 @@ import { User } from "./User";
 import { useState} from "react";
 
 function App() {
-    // const [age, setAge] = useState(0);
-    // const increaseAge = () => {
-    //     setAge(age +1);
-    //     console.log(age);
-    // };
+    const [list, setList] = useState([]);
+    const [task, setTask] = useState("");
 
-    // const [inputValue, setInputValue] = useState("");
-    // const handleInputChange = (event) => {
-    //     setInputValue(event.target.value);
-    // }
-
-    // const [showText, setShowText] = useState(false);
-
-    // const [textColor, setTextColor] = useState("blue");
-
-    const [count, setCount] = useState(0);
-
-    const increaseNumber = () => {
-        setCount(count + 1);
+    const handleChange = (event) => {
+        setTask(event.target.value);
     }
 
-    const decreaseNumber = () => {
-      setCount(count - 1);
+    const addTask = () => {
+        const task = {
+            id: list.length === 0 ? 1 : list[list.length - 1].id + 1,
+            taskName: task,
+        }
+      setList([...list, task]);
+    }
+    
+    const deleteTask = (id) => {
+      const newTodoList = list.filter((task)=> {
+        return task.id !== id;
+      });
+      setList(newTodoList);
     }
 
-    const resetNumber = () => {
-        setCount(0);
-    }
     return (
         <div className="App">
-            <button onClick={increaseNumber}>Increase</button>
-            <button onClick={decreaseNumber}>Decrease</button>
-            <button onClick={resetNumber}>Set to Zero</button>
-            {count}
+           <div className="addTask">
+               <input onChange={handleChange}/>
+               <button onClick={addTask}> Add Task</button>
+           </div>
+            <div className="list">
+                {list.map((task) => {
+                    return <div>
+                        <h1>{task.taskName}</h1>
+                        <button onClick={() => deleteTask(task.id)}> X </button>
+                    </div>
+                })}
+            </div>
 
-            {/*<button onClick={() => {setTextColor(textColor === 'blue' ?"red" : 'blue')}}>Show/Hide</button>*/}
-            {/*<h1 style={{color: textColor}}> My name is San.D</h1>*/}
-
-            {/*<button onClick={() => {setShowText(!showText)}}>Show/Hide</button>*/}
-            {/*{ showText === true && <h1> My name is San.D</h1>}*/}
-
-
-            {/*<input type="text" onChange={handleInputChange}/>*/}
-            {/*{inputValue}*/}
-
-            {/*{age}*/}
-            {/*<button onClick={increaseAge}>Increase the Age</button>*/}
         </div>
     );
 }
