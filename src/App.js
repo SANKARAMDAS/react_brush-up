@@ -1,27 +1,25 @@
 import "./App.css";
 import { User } from "./User";
 import {useEffect, useState} from "react";
-import { Text} from "./Text";
-import Axios from "axios";
+import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
+import {HomePage} from "./pages/Home";
+import {Menu} from "./pages/Menu";
+import {Contact} from "./pages/Contact";
+import {Navbar} from "./Navbar";
 
 function App() {
-    const [generate, setGenerate] = useState("");
-
-    const fetchData = (excuse) => {
-      Axios.get(`https://excuser.herokuapp.com/v1/excuse/${excuse}/`).
-          then((res) => {
-          setGenerate(res.data[0].excuse);
-      });
-    };
 
     return (
         <div className= "App">
-            <h1>Generate An Excuse</h1>
-            <button onClick={() => fetchData("party")}>Party</button>
-            <button onClick={() => fetchData("family")}>Family</button>
-            <button onClick={() => fetchData("office")}>Office</button>
-
-            <p>{generate}</p>
+            <Router>
+                <Navbar />
+                <Routes>
+                    <Route path='/' element={<HomePage />}/>
+                    <Route path='/menu' element={<Menu />}/>
+                    <Route path='/contact' element={<Contact />}/>
+                    <Route path='*' element={<h1>The page you are looking for not found.</h1>}/>
+                </Routes>
+            </Router>
         </div>
     )
 }
