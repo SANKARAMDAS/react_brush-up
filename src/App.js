@@ -5,25 +5,23 @@ import { Text} from "./Text";
 import Axios from "axios";
 
 function App() {
+    const [generate, setGenerate] = useState("");
 
-    const [name, setName] = useState("");
-    const [predictedAge, setPredictedAge] = useState(null);
-    const fetchData = () => {
-      Axios.get(`https://api.agify.io/?name=${name}`).then((res) => {
-          setPredictedAge(res.data);
+    const fetchData = (excuse) => {
+      Axios.get(`https://excuser.herokuapp.com/v1/excuse/${excuse}/`).
+          then((res) => {
+          setGenerate(res.data[0].excuse);
       });
-    }
+    };
 
     return (
-        <div className="App">
-            <input placeholder="Ex. Pedro..."
-            onChange={(event) => {
-                setName(event.target.value);
-            }}/>
-            <button onClick={fetchData}> Predict Age </button>
-            <h1>Name: {predictedAge?.name}</h1>
-            <h1>Predicted Age: {predictedAge?.age}</h1>
-            <h1>Count: {predictedAge?.count}</h1>
+        <div className= "App">
+            <h1>Generate An Excuse</h1>
+            <button onClick={() => fetchData("party")}>Party</button>
+            <button onClick={() => fetchData("family")}>Family</button>
+            <button onClick={() => fetchData("office")}>Office</button>
+
+            <p>{generate}</p>
         </div>
     )
 }
